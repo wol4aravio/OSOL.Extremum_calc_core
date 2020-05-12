@@ -1,4 +1,4 @@
-name = "osol_extremum_calc_core"
+name = "OSOL_Extremum"
 uuid = "54edbfc8-4026-4823-a5ac-682072158bad"
 authors = ["wol4aravio <panovskiy.v@yandex.ru>"]
 version = "0.1.0"

@@ -1,4 +1,4 @@
-module osol_extremum_calc_core
+module OSOL_Extremum
 
 using Bukdu
 
