@@ -7,6 +7,9 @@ struct Benchmark
     Benchmark(; f, search_area, solution) = new(f, search_area, solution)
 end
 
+# http://benchmarkfcns.xyz/
+# http://infinity77.net/
+
 ###########################################################################
 #                                 2 DIM                                   #
 ###########################################################################
@@ -38,3 +41,19 @@ ackley_3 = Benchmark(
 )
 
 ###########################################################################
+
+function _adjiman_func(v)
+    x = v[1]
+    y = v[2]
+    return cos(x)sin(y) - x/(y^2 + 1)
+end
+
+adjiman = Benchmark(
+    f = _adjiman_func,
+    search_area = [[-1 2]; [-1 1]],
+    solution = [2; 0.10578],
+)
+
+###########################################################################
+
+end
