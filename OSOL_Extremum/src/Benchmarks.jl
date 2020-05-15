@@ -1,18 +1,25 @@
 module Benchmarks
 
+using Zygote
+
 struct Benchmark
     f
     search_area::Array{Float64,2}
     solution::Array{Float64,1}
-    Benchmark(; f, search_area, solution) = new(f, search_area, solution)
+    name::String
+    Benchmark(; f, search_area, solution, name) = new(f, search_area, solution, name)
+
+    function grad(x)
+        return gradient(f, x)
+
 end
 
 # http://benchmarkfcns.xyz/
 # http://infinity77.net/
 
-###########################################################################
-#                                 2 DIM                                   #
-###########################################################################
+################################################################################
+#                                 2 DIM                                        #
+################################################################################
 
 function _ackley_2_func(v)
     x = v[1]
@@ -24,9 +31,10 @@ ackley_2 = Benchmark(
     f = _ackley_2_func,
     search_area = [[-32 32]; [-32 32]],
     solution = [0; 0],
+    name = "Ackely #2",
 )
 
-###########################################################################
+################################################################################
 
 function _ackley_3_func(v)
     x = v[1]
@@ -38,9 +46,10 @@ ackley_3 = Benchmark(
     f = _ackley_3_func,
     search_area = [[-32 32]; [-32 32]],
     solution = [0.682584587365898; -0.36075325513719],
+    name = "Ackely #3",
 )
 
-###########################################################################
+################################################################################
 
 function _adjiman_func(v)
     x = v[1]
@@ -52,8 +61,9 @@ adjiman = Benchmark(
     f = _adjiman_func,
     search_area = [[-1 2]; [-1 1]],
     solution = [2; 0.10578],
+    name = "Adjiman",
 )
 
-###########################################################################
+################################################################################
 
 end
