@@ -24,6 +24,23 @@ end
 routes() do
     get("/health", RESTController, health)
     get("/problems", RESTController, list_of_problems)
+    for p in problems
+        name = p.name
+        function problem_call(c::RESTController)
+            @info :payload (c.params.x)
+            return render(JSON, p.f(c.params.x))
+        end
+        post("/call_f/$name", RESTController, problem_call)
+    end
+    for p in problems
+        name = p.name
+        function problem_call(c::RESTController)
+            @info :payload (c.params.x)
+            return render(JSON, p.f'(c.params.x))
+        end
+        post("/call_f_grad/$name", RESTController, problem_call)
+    end
+    plug(Plug.Parsers, [:json])
 end
 
 Bukdu.start(8085)

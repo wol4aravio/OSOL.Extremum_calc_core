@@ -9,9 +9,6 @@ struct Benchmark
     name::String
     Benchmark(; f, search_area, solution, name) = new(f, search_area, solution, name)
 
-    function grad(x)
-        return gradient(f, x)
-
 end
 
 # http://benchmarkfcns.xyz/
@@ -31,7 +28,7 @@ ackley_2 = Benchmark(
     f = _ackley_2_func,
     search_area = [[-32 32]; [-32 32]],
     solution = [0; 0],
-    name = "Ackely #2",
+    name = "AckleyNum2",
 )
 
 ################################################################################
@@ -46,7 +43,7 @@ ackley_3 = Benchmark(
     f = _ackley_3_func,
     search_area = [[-32 32]; [-32 32]],
     solution = [0.682584587365898; -0.36075325513719],
-    name = "Ackely #3",
+    name = "AckleyNum3",
 )
 
 ################################################################################
