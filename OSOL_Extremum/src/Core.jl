@@ -43,4 +43,5 @@ routes() do
     plug(Plug.Parsers, [:json])
 end
 
-Bukdu.start(8085)
+Bukdu.start(8085, host = "0.0.0.0")
+wait()
