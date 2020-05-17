@@ -30,7 +30,7 @@ routes() do
             @info :payload (c.params.x)
             return render(JSON, p.f(c.params.x))
         end
-        post("/call_f/$name", RESTController, problem_call)
+        post("/problems/$name/f", RESTController, problem_call)
     end
     for p in problems
         name = p.name
@@ -38,7 +38,7 @@ routes() do
             @info :payload (c.params.x)
             return render(JSON, p.f'(c.params.x))
         end
-        post("/call_f_grad/$name", RESTController, problem_call)
+        post("/problems/$name/f_grad", RESTController, problem_call)
     end
     plug(Plug.Parsers, [:json])
 end
