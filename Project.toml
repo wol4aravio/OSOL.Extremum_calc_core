@@ -1,3 +1,4 @@
 [deps]
 Bukdu = "3e78a19a-cc83-51d8-955b-515f39fd7955"
+DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
 Zygote = "e88e6eb3-aa80-5325-afca-941959d7151f"
