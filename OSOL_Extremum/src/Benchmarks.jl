@@ -123,4 +123,21 @@ easom = Benchmark(
 
 ################################################################################
 
+function _keane_func(v)
+    x = v[1]
+    y = v[2]
+    nume = (sin(x - y))^2 * (sin(x + y))^2
+    denom = sqrt(x^2 + y^2)
+    return -nume/denom
+end
+
+keane = Benchmark(
+    f = _keane_func,
+    search_area = [[-100 100]; [-100 100]],
+    solution = [π; π],
+    name = "Keane",
+)
+
+################################################################################
+
 end
