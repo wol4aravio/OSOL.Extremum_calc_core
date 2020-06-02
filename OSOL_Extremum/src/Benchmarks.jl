@@ -63,4 +63,96 @@ adjiman = Benchmark(
 
 ################################################################################
 
+function _beale_func(v)
+    x = v[1]
+    y = v[2]
+    return (1.5 - x - x*y)^2 + (2.25 - x + x*y^2)^2 + (2.625 - x + x*y^3)^2
+end
+
+beale = Benchmark(
+    f = _beale_func,
+    search_area = [[-4.5 4.5]; [-4.5 4.5]],
+    solution = [3; 0.5],
+    name = "Beale",
+)
+
+################################################################################
+
+function _booth_func(v)
+    x = v[1]
+    y = v[2]
+    return (x + 2y - 7)^2 + (2x + y - 5)^2
+end
+
+booth = Benchmark(
+    f = _beale_func,
+    search_area = [[-10 10]; [-10 10]],
+    solution = [1; 3],
+    name = "Booth",
+)
+
+################################################################################
+
+function _brent_func(v)
+    x = v[1]
+    y = v[2]
+    return (x + 10)^2 + (y + 10)^2 + exp(-x^2 - y^2)
+end
+
+brent = Benchmark(
+    f = _brent_func,
+    search_area = [[-20 0]; [-20 0]],
+    solution = [-10; -10],
+    name = "Brent",
+)
+
+################################################################################
+
+function _easom_func(v)
+    x = v[1]
+    y = v[2]
+    return -cos(x)*cos(y)*exp(-(x - π)^2 - (y - π)^2)
+end
+
+easom = Benchmark(
+    f = _easom_func,
+    search_area = [[-100 100]; [-100 100]],
+    solution = [π; π],
+    name = "Easom",
+)
+
+################################################################################
+
+function _keane_func(v)
+    x = v[1]
+    y = v[2]
+    nume = (sin(x - y))^2 * (sin(x + y))^2
+    denom = sqrt(x^2 + y^2)
+    return -nume/denom
+end
+
+keane = Benchmark(
+    f = _keane_func,
+    search_area = [[-100 100]; [-100 100]],
+    solution = [π; π],
+    name = "Keane",
+)
+
+################################################################################
+
+function _matyas_func(v)
+    x = v[1]
+    y = v[2]
+    return 0.26 * (x^2 + y^2) - 0.48*x*y
+end
+
+matyas = Benchmark(
+    f = _matyas_func,
+    search_area = [[-10 10]; [-10 10]],
+    solution = [0; 0],
+    name = "Matyas",
+)
+
+################################################################################
+
 end
