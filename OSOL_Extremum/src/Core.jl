@@ -28,6 +28,7 @@ end
 function solve_ode(c::RESTController)
     problem_name = c.params.problem_name
     controls = c.params.controls
+    return_controls = c.params.return_controls
     initial_state = convert(Array{Float64}, c.params.initial_state)
     integration_settings = c.params.integration_settings
 
@@ -36,7 +37,13 @@ function solve_ode(c::RESTController)
     DynamicSystems.DS[problem_name] = remake(DynamicSystems.DS[problem_name], p=controls, u0=initial_state)
     solution = solve(DynamicSystems.DS[problem_name], saveat=integration_settings["saveat"])
 
-    render(JSON, Dict("t" => solution.t, "x" => solution.u))
+    response = Dict("t" => solution.t, "x" => solution.u)
+    if return_controls
+        response["u"] = [c.(solution.t, solution.u) for c in controls]
+        response["u"] = [collect(t) for t in zip(response["u"]...)]
+    end
+
+    render(JSON, response)
 end
 
 routes() do

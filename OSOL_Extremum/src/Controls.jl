@@ -8,10 +8,10 @@ struct PiecewiseConstantControl
         length(grid_values) >= length(grid) ? error("Wrong config") : new(grid, grid_values, default_value)
 end
 
-@noinline function (pcc::PiecewiseConstantControl)(x)
+@noinline function (pcc::PiecewiseConstantControl)(t, _)
     for (i, x0) in enumerate(pcc.grid[1:length(pcc.grid)-1])
         x1 = pcc.grid[i + 1]
-        if x0 <= x < x1
+        if x0 <= t < x1
             return pcc.grid_values[i]
         end
     end
@@ -27,13 +27,13 @@ struct PiecewiseLinearControl
         length(grid_values) != length(grid) ? error("Wrong config") : new(grid, grid_values, default_value)
 end
 
-@noinline function (plc::PiecewiseLinearControl)(x)
+@noinline function (plc::PiecewiseLinearControl)(t, _)
     for (i, x0) in enumerate(plc.grid[1:length(plc.grid)-1])
         x1 = plc.grid[i + 1]
-        if x0 <= x < x1
+        if x0 <= t < x1
             y0 = plc.grid_values[i]
             y1 = plc.grid_values[i + 1]
-            return (y1 * (x - x0) + y0 * (x1 - x)) / (x1 - x0)
+            return (y1 * (t - x0) + y0 * (x1 - t)) / (x1 - x0)
         end
     end
     return plc.default_value

@@ -7,8 +7,8 @@ function ode_satellite_orientation(x, p, t)
     u = p[1]
     return [
         x₂,
-        u(t),
-        u(t) ^ 2
+        u(t, x),
+        u(t, x) ^ 2
     ]
 end
 
