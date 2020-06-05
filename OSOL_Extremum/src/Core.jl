@@ -36,7 +36,7 @@ function solve_ode(c::RESTController)
     DynamicSystems.DS[problem_name] = remake(DynamicSystems.DS[problem_name], p=controls, u0=initial_state)
     solution = solve(DynamicSystems.DS[problem_name], saveat=integration_settings["saveat"])
 
-    render(JSON, solution)
+    render(JSON, Dict("t" => solution.t, "x" => solution.u))
 end
 
 routes() do
